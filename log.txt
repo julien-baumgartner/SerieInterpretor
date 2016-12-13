@@ -1,0 +1,364 @@
+WARNING: Token 'RETURN' defined, but not used
+WARNING: There is 1 unused token
+Generating LALR tables
+PLY: PARSE DEBUG START
+
+State  : 0
+Stack  : . LexToken(IDENTIFIER,'c1',1,0)
+Action : Shift and goto state 1
+
+State  : 1
+Stack  : IDENTIFIER . LexToken(=,'=',1,3)
+Action : Shift and goto state 10
+
+State  : 10
+Stack  : IDENTIFIER = . LexToken(IDENTIFIER,'x',1,5)
+Action : Shift and goto state 20
+
+State  : 20
+Stack  : IDENTIFIER = IDENTIFIER . LexToken(ITER,'iter',1,7)
+Action : Shift and goto state 31
+
+State  : 31
+Stack  : IDENTIFIER = IDENTIFIER ITER . LexToken(IDENTIFIER,'y',1,12)
+Action : Shift and goto state 39
+
+State  : 39
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER . LexToken(AS,'as',1,14)
+Action : Shift and goto state 44
+
+State  : 44
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS . LexToken(NUMBER,3.0,1,17)
+Action : Shift and goto state 16
+
+State  : 16
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS NUMBER . LexToken(:,':',1,19)
+Action : Reduce rule [nombre -> NUMBER] with [3.0] and goto state 48
+Result : <TokenNode @ 0x11d32b0> (3.0)
+
+State  : 48
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre . LexToken(:,':',1,19)
+Action : Shift and goto state 52
+
+State  : 52
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : . LexToken(IDENTIFIER,'y',1,21)
+Action : Shift and goto state 15
+
+State  : 15
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : IDENTIFIER . LexToken(ADD_OP,'+',1,22)
+Action : Reduce rule [nombre -> IDENTIFIER] with ['y'] and goto state 13
+Result : <TokenNode @ 0x11d32e8> ('y')
+
+State  : 13
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : nombre . LexToken(ADD_OP,'+',1,22)
+Action : Reduce rule [expression -> nombre] with ['y'] and goto state 55
+Result : <TokenNode @ 0x11d33c8> ('y')
+
+State  : 55
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression . LexToken(ADD_OP,'+',1,22)
+Action : Shift and goto state 27
+
+State  : 27
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression ADD_OP . LexToken(NUMBER,1.0,1,23)
+Action : Shift and goto state 16
+
+State  : 16
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression ADD_OP NUMBER . LexToken(;,';',1,24)
+Action : Reduce rule [nombre -> NUMBER] with [1.0] and goto state 13
+Result : <TokenNode @ 0x11d3400> (1.0)
+
+State  : 13
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression ADD_OP nombre . LexToken(;,';',1,24)
+Action : Reduce rule [expression -> nombre] with [1.0] and goto state 36
+Result : <TokenNode @ 0x11d3518> (1.0)
+
+State  : 36
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression ADD_OP expression . LexToken(;,';',1,24)
+Action : Reduce rule [expression -> expression ADD_OP expression] with ['y','+',1.0] and goto state 55
+Result : <OpNode @ 0x11d34e0> (+ (2))
+
+State  : 55
+Stack  : IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression . LexToken(;,';',1,24)
+Action : Reduce rule [assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression] with ['c1','=','x','iter','y','as',3.0,':',+ (2)] and goto state 8
+Result : <AssignNode @ 0x11d35f8> (=)
+
+State  : 8
+Defaulted state 8: Reduce using 4
+Stack  : assignation-serie . LexToken(;,';',1,24)
+Action : Reduce rule [statement -> assignation-serie] with [=] and goto state 9
+Result : <AssignNode @ 0x11d35f8> (=)
+
+State  : 9
+Stack  : statement . LexToken(;,';',1,24)
+Action : Shift and goto state 19
+
+State  : 19
+Stack  : statement ; . LexToken(IDENTIFIER,'c2',2,26)
+Action : Shift and goto state 1
+
+State  : 1
+Stack  : statement ; IDENTIFIER . LexToken(=,'=',2,29)
+Action : Shift and goto state 10
+
+State  : 10
+Stack  : statement ; IDENTIFIER = . LexToken(IDENTIFIER,'x',2,31)
+Action : Shift and goto state 20
+
+State  : 20
+Stack  : statement ; IDENTIFIER = IDENTIFIER . LexToken(ITER,'iter',2,33)
+Action : Shift and goto state 31
+
+State  : 31
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER . LexToken(IDENTIFIER,'y',2,38)
+Action : Shift and goto state 39
+
+State  : 39
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER . LexToken(AS,'as',2,40)
+Action : Shift and goto state 44
+
+State  : 44
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS . LexToken(NUMBER,4.2,2,43)
+Action : Shift and goto state 16
+
+State  : 16
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS NUMBER . LexToken(:,':',2,47)
+Action : Reduce rule [nombre -> NUMBER] with [4.2] and goto state 48
+Result : <TokenNode @ 0x11d3710> (4.2)
+
+State  : 48
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre . LexToken(:,':',2,47)
+Action : Shift and goto state 52
+
+State  : 52
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : . LexToken(IDENTIFIER,'c1',2,49)
+Action : Shift and goto state 15
+
+State  : 15
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : IDENTIFIER . LexToken([,'[',2,51)
+Action : Shift and goto state 28
+
+State  : 28
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : IDENTIFIER [ . LexToken(IDENTIFIER,'x',2,52)
+Action : Shift and goto state 15
+
+State  : 15
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : IDENTIFIER [ IDENTIFIER . LexToken(],']',2,53)
+Action : Reduce rule [nombre -> IDENTIFIER] with ['x'] and goto state 37
+Result : <TokenNode @ 0x11d32b0> ('x')
+
+State  : 37
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : IDENTIFIER [ nombre . LexToken(],']',2,53)
+Action : Shift and goto state 42
+
+State  : 42
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : IDENTIFIER [ nombre ] . LexToken(;,';',2,54)
+Action : Reduce rule [nombre -> IDENTIFIER [ nombre ]] with ['c1','[','x',']'] and goto state 13
+Result : <TokenNode @ 0x11d34e0> ('c1')
+
+State  : 13
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : nombre . LexToken(;,';',2,54)
+Action : Reduce rule [expression -> nombre] with ['c1'] and goto state 55
+Result : <TokenNode @ 0x11d36a0> ('c1')
+
+State  : 55
+Stack  : statement ; IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression . LexToken(;,';',2,54)
+Action : Reduce rule [assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression] with ['c2','=','x','iter','y','as',4.2,':','c1'] and goto state 8
+Result : <AssignNode @ 0x11d3470> (=)
+
+State  : 8
+Defaulted state 8: Reduce using 4
+Stack  : statement ; assignation-serie . LexToken(;,';',2,54)
+Action : Reduce rule [statement -> assignation-serie] with [=] and goto state 9
+Result : <AssignNode @ 0x11d3470> (=)
+
+State  : 9
+Stack  : statement ; statement . LexToken(;,';',2,54)
+Action : Shift and goto state 19
+
+State  : 19
+Stack  : statement ; statement ; . LexToken(IDENTIFIER,'c3',3,56)
+Action : Shift and goto state 1
+
+State  : 1
+Stack  : statement ; statement ; IDENTIFIER . LexToken(=,'=',3,59)
+Action : Shift and goto state 10
+
+State  : 10
+Stack  : statement ; statement ; IDENTIFIER = . LexToken(FOREACH,'foreach',3,61)
+Action : Shift and goto state 21
+
+State  : 21
+Stack  : statement ; statement ; IDENTIFIER = FOREACH . LexToken((,'(',3,69)
+Action : Shift and goto state 32
+
+State  : 32
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( . LexToken(IDENTIFIER,'x',3,70)
+Action : Shift and goto state 40
+
+State  : 40
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER . LexToken(ITER,'iter',3,72)
+Action : Shift and goto state 46
+
+State  : 46
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER . LexToken(IDENTIFIER,'y',3,77)
+Action : Shift and goto state 50
+
+State  : 50
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER . LexToken(AS,'as',3,79)
+Action : Shift and goto state 53
+
+State  : 53
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS . LexToken(NUMBER,2.0,3,82)
+Action : Shift and goto state 16
+
+State  : 16
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS NUMBER . LexToken(),')',3,83)
+Action : Reduce rule [nombre -> NUMBER] with [2.0] and goto state 56
+Result : <TokenNode @ 0x11d32b0> (2.0)
+
+State  : 56
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre . LexToken(),')',3,83)
+Action : Shift and goto state 58
+
+State  : 58
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) . LexToken({,'{',3,84)
+Action : Shift and goto state 59
+
+State  : 59
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { . LexToken(IDENTIFIER,'y',4,90)
+Action : Shift and goto state 1
+
+State  : 1
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER . LexToken(=,'=',4,92)
+Action : Shift and goto state 10
+
+State  : 10
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = . LexToken(IDENTIFIER,'c2',4,94)
+Action : Shift and goto state 20
+
+State  : 20
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = IDENTIFIER . LexToken([,'[',4,96)
+Action : Shift and goto state 28
+
+State  : 28
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = IDENTIFIER [ . LexToken(IDENTIFIER,'x',4,97)
+Action : Shift and goto state 15
+
+State  : 15
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = IDENTIFIER [ IDENTIFIER . LexToken(],']',4,98)
+Action : Reduce rule [nombre -> IDENTIFIER] with ['x'] and goto state 37
+Result : <TokenNode @ 0x11d3668> ('x')
+
+State  : 37
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = IDENTIFIER [ nombre . LexToken(],']',4,98)
+Action : Shift and goto state 42
+
+State  : 42
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = IDENTIFIER [ nombre ] . LexToken(ADD_OP,'+',4,100)
+Action : Reduce rule [nombre -> IDENTIFIER [ nombre ]] with ['c2','[','x',']'] and goto state 13
+Result : <TokenNode @ 0x11d38d0> ('c2')
+
+State  : 13
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = nombre . LexToken(ADD_OP,'+',4,100)
+Action : Reduce rule [expression -> nombre] with ['c2'] and goto state 22
+Result : <TokenNode @ 0x11d3860> ('c2')
+
+State  : 22
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression . LexToken(ADD_OP,'+',4,100)
+Action : Shift and goto state 27
+
+State  : 27
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP . LexToken(IDENTIFIER,'c1',4,102)
+Action : Shift and goto state 15
+
+State  : 15
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP IDENTIFIER . LexToken([,'[',4,104)
+Action : Shift and goto state 28
+
+State  : 28
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP IDENTIFIER [ . LexToken(NUMBER,4.0,4,105)
+Action : Shift and goto state 16
+
+State  : 16
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP IDENTIFIER [ NUMBER . LexToken(],']',4,106)
+Action : Reduce rule [nombre -> NUMBER] with [4.0] and goto state 37
+Result : <TokenNode @ 0x11d39b0> (4.0)
+
+State  : 37
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP IDENTIFIER [ nombre . LexToken(],']',4,106)
+Action : Shift and goto state 42
+
+State  : 42
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP IDENTIFIER [ nombre ] . LexToken(;,';',4,107)
+Action : Reduce rule [nombre -> IDENTIFIER [ nombre ]] with ['c1','[',4.0,']'] and goto state 13
+Result : <TokenNode @ 0x11d3908> ('c1')
+
+State  : 13
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP nombre . LexToken(;,';',4,107)
+Action : Reduce rule [expression -> nombre] with ['c1'] and goto state 36
+Result : <TokenNode @ 0x11d3668> ('c1')
+
+State  : 36
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression ADD_OP expression . LexToken(;,';',4,107)
+Action : Reduce rule [expression -> expression ADD_OP expression] with ['c2','+','c1'] and goto state 22
+Result : <OpNode @ 0x11d3b70> (+ (2))
+
+State  : 22
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { IDENTIFIER = expression . LexToken(;,';',4,107)
+Action : Reduce rule [assignation-valeur -> IDENTIFIER = expression] with ['y','=',+ (2)] and goto state 6
+Result : <AssignNode @ 0x11d3c50> (=)
+
+State  : 6
+Defaulted state 6: Reduce using 3
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { assignation-valeur . LexToken(;,';',4,107)
+Action : Reduce rule [statement -> assignation-valeur] with [=] and goto state 9
+Result : <AssignNode @ 0x11d3c50> (=)
+
+State  : 9
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { statement . LexToken(;,';',4,107)
+Action : Shift and goto state 19
+
+State  : 19
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { statement ; . LexToken(},'}',5,109)
+Action : Reduce rule [programme -> statement ;] with [=,';'] and goto state 60
+Result : <ProgramNode @ 0x11d3c18> (Program)
+
+State  : 60
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme . LexToken(},'}',5,109)
+Action : Shift and goto state 61
+
+State  : 61
+Defaulted state 61: Reduce using 10
+Stack  : statement ; statement ; IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme } . None
+Action : Reduce rule [assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }] with ['c3','=','foreach','(','x','iter','y','as',2.0,')','{',Program,'}'] and goto state 8
+Result : <AssignNode @ 0x11d3cc0> (=)
+
+State  : 8
+Defaulted state 8: Reduce using 4
+Stack  : statement ; statement ; assignation-serie . None
+Action : Reduce rule [statement -> assignation-serie] with [=] and goto state 9
+Result : <AssignNode @ 0x11d3cc0> (=)
+
+State  : 9
+Stack  : statement ; statement ; statement . LexToken(;,';',5,110)
+Action : Shift and goto state 19
+
+State  : 19
+Stack  : statement ; statement ; statement ; . $end
+Action : Reduce rule [programme -> statement ;] with [=,';'] and goto state 30
+Result : <ProgramNode @ 0x1337e10> (Program)
+
+State  : 30
+Stack  : statement ; statement ; programme . $end
+Action : Reduce rule [programme -> statement ; programme] with [=,';',Program] and goto state 30
+Result : <ProgramNode @ 0x1223eb8> (Program)
+
+State  : 30
+Stack  : statement ; programme . $end
+Action : Reduce rule [programme -> statement ; programme] with [=,';',Program] and goto state 3
+Result : <ProgramNode @ 0x11625f8> (Program)
+
+State  : 3
+Stack  : programme . $end
+Done   : Returning <ProgramNode @ 0x11625f8> (Program)
+PLY: PARSE DEBUG END

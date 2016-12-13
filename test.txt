@@ -1,0 +1,5 @@
+c1 = x iter y as 3 : y+1;
+c2 = x iter y as 4.2 : c1[x];
+c3 = foreach (x iter y as 2){
+    y = c2[x] + c1[4];
+};
