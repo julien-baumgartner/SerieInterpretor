@@ -14,53 +14,53 @@ Rule 4     statement -> assignation-serie
 Rule 5     statement -> structure
 Rule 6     statement -> PRINT expression
 Rule 7     assignation-valeur -> IDENTIFIER = expression
-Rule 8     assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-Rule 9     assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-Rule 10    assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-Rule 11    structure -> WHILE expression { programme }
-Rule 12    structure -> IF expression { programme }
-Rule 13    structure -> IF expression { programme } ELSE { programme }
-Rule 14    expression -> expression ADD_OP expression
-Rule 15    expression -> expression MUL_OP expression
-Rule 16    expression -> ADD_OP expression
-Rule 17    expression -> ( expression )
-Rule 18    expression -> nombre
-Rule 19    nombre -> NUMBER
-Rule 20    nombre -> IDENTIFIER
-Rule 21    nombre -> IDENTIFIER [ nombre ]
+Rule 8     assignation-serie -> IDENTIFIER = def-iter : expression
+Rule 9     assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { programme }
+Rule 10    def-iter -> IDENTIFIER ITER IDENTIFIER
+Rule 11    def-iter -> IDENTIFIER ITER IDENTIFIER AS expression
+Rule 12    structure -> WHILE expression { programme }
+Rule 13    structure -> IF expression { programme }
+Rule 14    structure -> IF expression { programme } ELSE { programme }
+Rule 15    expression -> expression ADD_OP expression
+Rule 16    expression -> expression MUL_OP expression
+Rule 17    expression -> ADD_OP expression
+Rule 18    expression -> ( expression )
+Rule 19    expression -> NUMBER
+Rule 20    expression -> IDENTIFIER
+Rule 21    expression -> IDENTIFIER [ expression ]
 
 Terminals, with rules where they appear
 
-(                    : 10 17
-)                    : 10 17
-:                    : 8 9
+(                    : 9 18
+)                    : 9 18
+:                    : 8
 ;                    : 1 2
-=                    : 7 8 9 10
-ADD_OP               : 14 16
-AS                   : 9 10
-ELSE                 : 13
-FOREACH              : 10
-IDENTIFIER           : 7 8 8 8 9 9 9 10 10 10 20 21
-IF                   : 12 13
-ITER                 : 8 9 10
-MUL_OP               : 15
+=                    : 7 8 9
+ADD_OP               : 15 17
+AS                   : 11
+ELSE                 : 14
+FOREACH              : 9
+IDENTIFIER           : 7 8 9 10 10 11 11 20 21
+IF                   : 13 14
+ITER                 : 10 11
+MUL_OP               : 16
 NUMBER               : 19
 PRINT                : 6
 RETURN               : 
-WHILE                : 11
+WHILE                : 12
 [                    : 21
 ]                    : 21
 error                : 
-{                    : 10 11 12 13 13
-}                    : 10 11 12 13 13
+{                    : 9 12 13 14 14
+}                    : 9 12 13 14 14
 
 Nonterminals, with rules where they appear
 
 assignation-serie    : 4
 assignation-valeur   : 3
-expression           : 6 7 8 9 11 12 13 14 14 15 15 16 17
-nombre               : 9 10 18 21
-programme            : 2 10 11 12 13 13 0
+def-iter             : 8 9
+expression           : 6 7 8 11 12 13 14 15 15 16 16 17 18 21
+programme            : 2 9 12 13 14 14 0
 statement            : 1 2
 structure            : 5
 
@@ -76,120 +76,112 @@ state 0
     (5) statement -> . structure
     (6) statement -> . PRINT expression
     (7) assignation-valeur -> . IDENTIFIER = expression
-    (8) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> . IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (11) structure -> . WHILE expression { programme }
-    (12) structure -> . IF expression { programme }
-    (13) structure -> . IF expression { programme } ELSE { programme }
+    (8) assignation-serie -> . IDENTIFIER = def-iter : expression
+    (9) assignation-serie -> . IDENTIFIER = FOREACH ( def-iter ) { programme }
+    (12) structure -> . WHILE expression { programme }
+    (13) structure -> . IF expression { programme }
+    (14) structure -> . IF expression { programme } ELSE { programme }
 
-    PRINT           shift and go to state 5
-    IDENTIFIER      shift and go to state 1
-    WHILE           shift and go to state 4
-    IF              shift and go to state 2
+    PRINT           shift and go to state 6
+    IDENTIFIER      shift and go to state 8
+    WHILE           shift and go to state 1
+    IF              shift and go to state 7
 
-    assignation-valeur             shift and go to state 6
-    structure                      shift and go to state 7
-    programme                      shift and go to state 3
-    assignation-serie              shift and go to state 8
+    structure                      shift and go to state 2
+    assignation-valeur             shift and go to state 3
+    programme                      shift and go to state 4
+    assignation-serie              shift and go to state 5
     statement                      shift and go to state 9
 
 state 1
 
-    (7) assignation-valeur -> IDENTIFIER . = expression
-    (8) assignation-serie -> IDENTIFIER . = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> IDENTIFIER . = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> IDENTIFIER . = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
+    (12) structure -> WHILE . expression { programme }
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    =               shift and go to state 10
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
+    expression                     shift and go to state 13
 
 state 2
-
-    (12) structure -> IF . expression { programme }
-    (13) structure -> IF . expression { programme } ELSE { programme }
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
-
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
-
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 14
-
-state 3
-
-    (0) S' -> programme .
-
-
-
-state 4
-
-    (11) structure -> WHILE . expression { programme }
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
-
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
-
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 17
-
-state 5
-
-    (6) statement -> PRINT . expression
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
-
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
-
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 18
-
-state 6
-
-    (3) statement -> assignation-valeur .
-
-    ;               reduce using rule 3 (statement -> assignation-valeur .)
-
-
-state 7
 
     (5) statement -> structure .
 
     ;               reduce using rule 5 (statement -> structure .)
 
 
-state 8
+state 3
+
+    (3) statement -> assignation-valeur .
+
+    ;               reduce using rule 3 (statement -> assignation-valeur .)
+
+
+state 4
+
+    (0) S' -> programme .
+
+
+
+state 5
 
     (4) statement -> assignation-serie .
 
     ;               reduce using rule 4 (statement -> assignation-serie .)
+
+
+state 6
+
+    (6) statement -> PRINT . expression
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
+
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 15
+
+state 7
+
+    (13) structure -> IF . expression { programme }
+    (14) structure -> IF . expression { programme } ELSE { programme }
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
+
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 16
+
+state 8
+
+    (7) assignation-valeur -> IDENTIFIER . = expression
+    (8) assignation-serie -> IDENTIFIER . = def-iter : expression
+    (9) assignation-serie -> IDENTIFIER . = FOREACH ( def-iter ) { programme }
+
+    =               shift and go to state 17
 
 
 state 9
@@ -197,147 +189,132 @@ state 9
     (1) programme -> statement . ;
     (2) programme -> statement . ; programme
 
-    ;               shift and go to state 19
+    ;               shift and go to state 18
 
 
 state 10
 
-    (7) assignation-valeur -> IDENTIFIER = . expression
-    (8) assignation-serie -> IDENTIFIER = . IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> IDENTIFIER = . IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> IDENTIFIER = . FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (17) expression -> ADD_OP . expression
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    IDENTIFIER      shift and go to state 20
-    FOREACH         shift and go to state 21
-    ADD_OP          shift and go to state 12
+    ADD_OP          shift and go to state 10
     (               shift and go to state 11
-    NUMBER          shift and go to state 16
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 22
+    expression                     shift and go to state 19
 
 state 11
 
-    (17) expression -> ( . expression )
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (18) expression -> ( . expression )
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    ADD_OP          shift and go to state 12
+    ADD_OP          shift and go to state 10
     (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 23
+    expression                     shift and go to state 20
 
 state 12
 
-    (16) expression -> ADD_OP . expression
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (19) expression -> NUMBER .
 
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    ]               reduce using rule 19 (expression -> NUMBER .)
+    ADD_OP          reduce using rule 19 (expression -> NUMBER .)
+    MUL_OP          reduce using rule 19 (expression -> NUMBER .)
+    ;               reduce using rule 19 (expression -> NUMBER .)
+    {               reduce using rule 19 (expression -> NUMBER .)
+    )               reduce using rule 19 (expression -> NUMBER .)
+    :               reduce using rule 19 (expression -> NUMBER .)
 
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 24
 
 state 13
 
-    (18) expression -> nombre .
+    (12) structure -> WHILE expression . { programme }
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    ADD_OP          reduce using rule 18 (expression -> nombre .)
-    MUL_OP          reduce using rule 18 (expression -> nombre .)
-    ;               reduce using rule 18 (expression -> nombre .)
-    )               reduce using rule 18 (expression -> nombre .)
-    {               reduce using rule 18 (expression -> nombre .)
+    {               shift and go to state 23
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
 
 state 14
 
-    (12) structure -> IF expression . { programme }
-    (13) structure -> IF expression . { programme } ELSE { programme }
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (20) expression -> IDENTIFIER .
+    (21) expression -> IDENTIFIER . [ expression ]
 
-    {               shift and go to state 26
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
+    ]               reduce using rule 20 (expression -> IDENTIFIER .)
+    ADD_OP          reduce using rule 20 (expression -> IDENTIFIER .)
+    MUL_OP          reduce using rule 20 (expression -> IDENTIFIER .)
+    ;               reduce using rule 20 (expression -> IDENTIFIER .)
+    {               reduce using rule 20 (expression -> IDENTIFIER .)
+    )               reduce using rule 20 (expression -> IDENTIFIER .)
+    :               reduce using rule 20 (expression -> IDENTIFIER .)
+    [               shift and go to state 24
 
 
 state 15
 
-    (20) nombre -> IDENTIFIER .
-    (21) nombre -> IDENTIFIER . [ nombre ]
+    (6) statement -> PRINT expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    ADD_OP          reduce using rule 20 (nombre -> IDENTIFIER .)
-    MUL_OP          reduce using rule 20 (nombre -> IDENTIFIER .)
-    ;               reduce using rule 20 (nombre -> IDENTIFIER .)
-    )               reduce using rule 20 (nombre -> IDENTIFIER .)
-    {               reduce using rule 20 (nombre -> IDENTIFIER .)
-    ]               reduce using rule 20 (nombre -> IDENTIFIER .)
-    :               reduce using rule 20 (nombre -> IDENTIFIER .)
-    [               shift and go to state 28
+    ;               reduce using rule 6 (statement -> PRINT expression .)
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
 
 state 16
 
-    (19) nombre -> NUMBER .
+    (13) structure -> IF expression . { programme }
+    (14) structure -> IF expression . { programme } ELSE { programme }
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    ADD_OP          reduce using rule 19 (nombre -> NUMBER .)
-    MUL_OP          reduce using rule 19 (nombre -> NUMBER .)
-    ;               reduce using rule 19 (nombre -> NUMBER .)
-    )               reduce using rule 19 (nombre -> NUMBER .)
-    {               reduce using rule 19 (nombre -> NUMBER .)
-    ]               reduce using rule 19 (nombre -> NUMBER .)
-    :               reduce using rule 19 (nombre -> NUMBER .)
+    {               shift and go to state 25
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
 
 state 17
 
-    (11) structure -> WHILE expression . { programme }
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (7) assignation-valeur -> IDENTIFIER = . expression
+    (8) assignation-serie -> IDENTIFIER = . def-iter : expression
+    (9) assignation-serie -> IDENTIFIER = . FOREACH ( def-iter ) { programme }
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
+    (10) def-iter -> . IDENTIFIER ITER IDENTIFIER
+    (11) def-iter -> . IDENTIFIER ITER IDENTIFIER AS expression
 
-    {               shift and go to state 29
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
+    FOREACH         shift and go to state 28
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 27
 
+    def-iter                       shift and go to state 26
+    expression                     shift and go to state 29
 
 state 18
-
-    (6) statement -> PRINT expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
-
-    ;               reduce using rule 6 (statement -> PRINT expression .)
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
-
-
-state 19
 
     (1) programme -> statement ; .
     (2) programme -> statement ; . programme
@@ -348,401 +325,421 @@ state 19
     (5) statement -> . structure
     (6) statement -> . PRINT expression
     (7) assignation-valeur -> . IDENTIFIER = expression
-    (8) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> . IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (11) structure -> . WHILE expression { programme }
-    (12) structure -> . IF expression { programme }
-    (13) structure -> . IF expression { programme } ELSE { programme }
+    (8) assignation-serie -> . IDENTIFIER = def-iter : expression
+    (9) assignation-serie -> . IDENTIFIER = FOREACH ( def-iter ) { programme }
+    (12) structure -> . WHILE expression { programme }
+    (13) structure -> . IF expression { programme }
+    (14) structure -> . IF expression { programme } ELSE { programme }
 
-    }               reduce using rule 1 (programme -> statement ; .)
     $end            reduce using rule 1 (programme -> statement ; .)
-    PRINT           shift and go to state 5
-    IDENTIFIER      shift and go to state 1
-    WHILE           shift and go to state 4
-    IF              shift and go to state 2
+    }               reduce using rule 1 (programme -> statement ; .)
+    PRINT           shift and go to state 6
+    IDENTIFIER      shift and go to state 8
+    WHILE           shift and go to state 1
+    IF              shift and go to state 7
 
-    assignation-valeur             shift and go to state 6
-    structure                      shift and go to state 7
+    structure                      shift and go to state 2
+    assignation-valeur             shift and go to state 3
     programme                      shift and go to state 30
-    assignation-serie              shift and go to state 8
+    assignation-serie              shift and go to state 5
     statement                      shift and go to state 9
+
+state 19
+
+    (17) expression -> ADD_OP expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
+
+    ]               reduce using rule 17 (expression -> ADD_OP expression .)
+    ADD_OP          reduce using rule 17 (expression -> ADD_OP expression .)
+    MUL_OP          reduce using rule 17 (expression -> ADD_OP expression .)
+    ;               reduce using rule 17 (expression -> ADD_OP expression .)
+    {               reduce using rule 17 (expression -> ADD_OP expression .)
+    )               reduce using rule 17 (expression -> ADD_OP expression .)
+    :               reduce using rule 17 (expression -> ADD_OP expression .)
+
+  ! ADD_OP          [ shift and go to state 22 ]
+  ! MUL_OP          [ shift and go to state 21 ]
+
 
 state 20
 
-    (8) assignation-serie -> IDENTIFIER = IDENTIFIER . ITER IDENTIFIER : expression
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER . ITER IDENTIFIER AS nombre : expression
-    (20) nombre -> IDENTIFIER .
-    (21) nombre -> IDENTIFIER . [ nombre ]
+    (18) expression -> ( expression . )
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    ITER            shift and go to state 31
-    ADD_OP          reduce using rule 20 (nombre -> IDENTIFIER .)
-    MUL_OP          reduce using rule 20 (nombre -> IDENTIFIER .)
-    ;               reduce using rule 20 (nombre -> IDENTIFIER .)
-    [               shift and go to state 28
+    )               shift and go to state 31
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
 
 state 21
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH . ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
+    (16) expression -> expression MUL_OP . expression
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    (               shift and go to state 32
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
+    expression                     shift and go to state 32
 
 state 22
 
-    (7) assignation-valeur -> IDENTIFIER = expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (15) expression -> expression ADD_OP . expression
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    ;               reduce using rule 7 (assignation-valeur -> IDENTIFIER = expression .)
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
+    expression                     shift and go to state 33
 
 state 23
 
-    (17) expression -> ( expression . )
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (12) structure -> WHILE expression { . programme }
+    (1) programme -> . statement ;
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation-valeur
+    (4) statement -> . assignation-serie
+    (5) statement -> . structure
+    (6) statement -> . PRINT expression
+    (7) assignation-valeur -> . IDENTIFIER = expression
+    (8) assignation-serie -> . IDENTIFIER = def-iter : expression
+    (9) assignation-serie -> . IDENTIFIER = FOREACH ( def-iter ) { programme }
+    (12) structure -> . WHILE expression { programme }
+    (13) structure -> . IF expression { programme }
+    (14) structure -> . IF expression { programme } ELSE { programme }
 
-    )               shift and go to state 33
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
+    PRINT           shift and go to state 6
+    IDENTIFIER      shift and go to state 8
+    WHILE           shift and go to state 1
+    IF              shift and go to state 7
 
+    structure                      shift and go to state 2
+    assignation-valeur             shift and go to state 3
+    programme                      shift and go to state 34
+    assignation-serie              shift and go to state 5
+    statement                      shift and go to state 9
 
 state 24
 
-    (16) expression -> ADD_OP expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (21) expression -> IDENTIFIER [ . expression ]
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    ADD_OP          reduce using rule 16 (expression -> ADD_OP expression .)
-    MUL_OP          reduce using rule 16 (expression -> ADD_OP expression .)
-    ;               reduce using rule 16 (expression -> ADD_OP expression .)
-    )               reduce using rule 16 (expression -> ADD_OP expression .)
-    {               reduce using rule 16 (expression -> ADD_OP expression .)
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
-  ! ADD_OP          [ shift and go to state 27 ]
-  ! MUL_OP          [ shift and go to state 25 ]
-
+    expression                     shift and go to state 35
 
 state 25
 
-    (15) expression -> expression MUL_OP . expression
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (13) structure -> IF expression { . programme }
+    (14) structure -> IF expression { . programme } ELSE { programme }
+    (1) programme -> . statement ;
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation-valeur
+    (4) statement -> . assignation-serie
+    (5) statement -> . structure
+    (6) statement -> . PRINT expression
+    (7) assignation-valeur -> . IDENTIFIER = expression
+    (8) assignation-serie -> . IDENTIFIER = def-iter : expression
+    (9) assignation-serie -> . IDENTIFIER = FOREACH ( def-iter ) { programme }
+    (12) structure -> . WHILE expression { programme }
+    (13) structure -> . IF expression { programme }
+    (14) structure -> . IF expression { programme } ELSE { programme }
 
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    PRINT           shift and go to state 6
+    IDENTIFIER      shift and go to state 8
+    WHILE           shift and go to state 1
+    IF              shift and go to state 7
 
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 34
+    structure                      shift and go to state 2
+    assignation-valeur             shift and go to state 3
+    programme                      shift and go to state 36
+    assignation-serie              shift and go to state 5
+    statement                      shift and go to state 9
 
 state 26
 
-    (12) structure -> IF expression { . programme }
-    (13) structure -> IF expression { . programme } ELSE { programme }
-    (1) programme -> . statement ;
-    (2) programme -> . statement ; programme
-    (3) statement -> . assignation-valeur
-    (4) statement -> . assignation-serie
-    (5) statement -> . structure
-    (6) statement -> . PRINT expression
-    (7) assignation-valeur -> . IDENTIFIER = expression
-    (8) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> . IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (11) structure -> . WHILE expression { programme }
-    (12) structure -> . IF expression { programme }
-    (13) structure -> . IF expression { programme } ELSE { programme }
+    (8) assignation-serie -> IDENTIFIER = def-iter . : expression
 
-    PRINT           shift and go to state 5
-    IDENTIFIER      shift and go to state 1
-    WHILE           shift and go to state 4
-    IF              shift and go to state 2
+    :               shift and go to state 37
 
-    assignation-valeur             shift and go to state 6
-    structure                      shift and go to state 7
-    programme                      shift and go to state 35
-    assignation-serie              shift and go to state 8
-    statement                      shift and go to state 9
 
 state 27
 
-    (14) expression -> expression ADD_OP . expression
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (20) expression -> IDENTIFIER .
+    (21) expression -> IDENTIFIER . [ expression ]
+    (10) def-iter -> IDENTIFIER . ITER IDENTIFIER
+    (11) def-iter -> IDENTIFIER . ITER IDENTIFIER AS expression
 
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    ADD_OP          reduce using rule 20 (expression -> IDENTIFIER .)
+    MUL_OP          reduce using rule 20 (expression -> IDENTIFIER .)
+    ;               reduce using rule 20 (expression -> IDENTIFIER .)
+    [               shift and go to state 24
+    ITER            shift and go to state 38
 
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 36
 
 state 28
 
-    (21) nombre -> IDENTIFIER [ . nombre ]
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (9) assignation-serie -> IDENTIFIER = FOREACH . ( def-iter ) { programme }
 
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    (               shift and go to state 39
 
-    nombre                         shift and go to state 37
 
 state 29
 
-    (11) structure -> WHILE expression { . programme }
-    (1) programme -> . statement ;
-    (2) programme -> . statement ; programme
-    (3) statement -> . assignation-valeur
-    (4) statement -> . assignation-serie
-    (5) statement -> . structure
-    (6) statement -> . PRINT expression
-    (7) assignation-valeur -> . IDENTIFIER = expression
-    (8) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> . IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (11) structure -> . WHILE expression { programme }
-    (12) structure -> . IF expression { programme }
-    (13) structure -> . IF expression { programme } ELSE { programme }
+    (7) assignation-valeur -> IDENTIFIER = expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    PRINT           shift and go to state 5
-    IDENTIFIER      shift and go to state 1
-    WHILE           shift and go to state 4
-    IF              shift and go to state 2
+    ;               reduce using rule 7 (assignation-valeur -> IDENTIFIER = expression .)
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
-    assignation-valeur             shift and go to state 6
-    structure                      shift and go to state 7
-    programme                      shift and go to state 38
-    assignation-serie              shift and go to state 8
-    statement                      shift and go to state 9
 
 state 30
 
     (2) programme -> statement ; programme .
 
-    }               reduce using rule 2 (programme -> statement ; programme .)
     $end            reduce using rule 2 (programme -> statement ; programme .)
+    }               reduce using rule 2 (programme -> statement ; programme .)
 
 
 state 31
 
-    (8) assignation-serie -> IDENTIFIER = IDENTIFIER ITER . IDENTIFIER : expression
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER ITER . IDENTIFIER AS nombre : expression
+    (18) expression -> ( expression ) .
 
-    IDENTIFIER      shift and go to state 39
+    ]               reduce using rule 18 (expression -> ( expression ) .)
+    ADD_OP          reduce using rule 18 (expression -> ( expression ) .)
+    MUL_OP          reduce using rule 18 (expression -> ( expression ) .)
+    ;               reduce using rule 18 (expression -> ( expression ) .)
+    {               reduce using rule 18 (expression -> ( expression ) .)
+    )               reduce using rule 18 (expression -> ( expression ) .)
+    :               reduce using rule 18 (expression -> ( expression ) .)
 
 
 state 32
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( . IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
+    (16) expression -> expression MUL_OP expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    IDENTIFIER      shift and go to state 40
+    ]               reduce using rule 16 (expression -> expression MUL_OP expression .)
+    ADD_OP          reduce using rule 16 (expression -> expression MUL_OP expression .)
+    MUL_OP          reduce using rule 16 (expression -> expression MUL_OP expression .)
+    ;               reduce using rule 16 (expression -> expression MUL_OP expression .)
+    {               reduce using rule 16 (expression -> expression MUL_OP expression .)
+    )               reduce using rule 16 (expression -> expression MUL_OP expression .)
+    :               reduce using rule 16 (expression -> expression MUL_OP expression .)
+
+  ! ADD_OP          [ shift and go to state 22 ]
+  ! MUL_OP          [ shift and go to state 21 ]
 
 
 state 33
 
-    (17) expression -> ( expression ) .
+    (15) expression -> expression ADD_OP expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    ADD_OP          reduce using rule 17 (expression -> ( expression ) .)
-    MUL_OP          reduce using rule 17 (expression -> ( expression ) .)
-    ;               reduce using rule 17 (expression -> ( expression ) .)
-    )               reduce using rule 17 (expression -> ( expression ) .)
-    {               reduce using rule 17 (expression -> ( expression ) .)
+    ]               reduce using rule 15 (expression -> expression ADD_OP expression .)
+    ADD_OP          reduce using rule 15 (expression -> expression ADD_OP expression .)
+    ;               reduce using rule 15 (expression -> expression ADD_OP expression .)
+    {               reduce using rule 15 (expression -> expression ADD_OP expression .)
+    )               reduce using rule 15 (expression -> expression ADD_OP expression .)
+    :               reduce using rule 15 (expression -> expression ADD_OP expression .)
+    MUL_OP          shift and go to state 21
+
+  ! MUL_OP          [ reduce using rule 15 (expression -> expression ADD_OP expression .) ]
+  ! ADD_OP          [ shift and go to state 22 ]
 
 
 state 34
 
-    (15) expression -> expression MUL_OP expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (12) structure -> WHILE expression { programme . }
 
-    ADD_OP          reduce using rule 15 (expression -> expression MUL_OP expression .)
-    MUL_OP          reduce using rule 15 (expression -> expression MUL_OP expression .)
-    ;               reduce using rule 15 (expression -> expression MUL_OP expression .)
-    )               reduce using rule 15 (expression -> expression MUL_OP expression .)
-    {               reduce using rule 15 (expression -> expression MUL_OP expression .)
-
-  ! ADD_OP          [ shift and go to state 27 ]
-  ! MUL_OP          [ shift and go to state 25 ]
+    }               shift and go to state 40
 
 
 state 35
 
-    (12) structure -> IF expression { programme . }
-    (13) structure -> IF expression { programme . } ELSE { programme }
+    (21) expression -> IDENTIFIER [ expression . ]
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    }               shift and go to state 41
+    ]               shift and go to state 41
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
 
 state 36
 
-    (14) expression -> expression ADD_OP expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (13) structure -> IF expression { programme . }
+    (14) structure -> IF expression { programme . } ELSE { programme }
 
-    ADD_OP          reduce using rule 14 (expression -> expression ADD_OP expression .)
-    ;               reduce using rule 14 (expression -> expression ADD_OP expression .)
-    )               reduce using rule 14 (expression -> expression ADD_OP expression .)
-    {               reduce using rule 14 (expression -> expression ADD_OP expression .)
-    MUL_OP          shift and go to state 25
-
-  ! MUL_OP          [ reduce using rule 14 (expression -> expression ADD_OP expression .) ]
-  ! ADD_OP          [ shift and go to state 27 ]
+    }               shift and go to state 42
 
 
 state 37
 
-    (21) nombre -> IDENTIFIER [ nombre . ]
+    (8) assignation-serie -> IDENTIFIER = def-iter : . expression
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    ]               shift and go to state 42
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
+    expression                     shift and go to state 43
 
 state 38
 
-    (11) structure -> WHILE expression { programme . }
+    (10) def-iter -> IDENTIFIER ITER . IDENTIFIER
+    (11) def-iter -> IDENTIFIER ITER . IDENTIFIER AS expression
 
-    }               shift and go to state 43
+    IDENTIFIER      shift and go to state 44
 
 
 state 39
 
-    (8) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER . : expression
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER . AS nombre : expression
+    (9) assignation-serie -> IDENTIFIER = FOREACH ( . def-iter ) { programme }
+    (10) def-iter -> . IDENTIFIER ITER IDENTIFIER
+    (11) def-iter -> . IDENTIFIER ITER IDENTIFIER AS expression
 
-    :               shift and go to state 45
-    AS              shift and go to state 44
+    IDENTIFIER      shift and go to state 46
 
+    def-iter                       shift and go to state 45
 
 state 40
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER . ITER IDENTIFIER AS nombre ) { programme }
+    (12) structure -> WHILE expression { programme } .
 
-    ITER            shift and go to state 46
+    ;               reduce using rule 12 (structure -> WHILE expression { programme } .)
 
 
 state 41
 
-    (12) structure -> IF expression { programme } .
-    (13) structure -> IF expression { programme } . ELSE { programme }
+    (21) expression -> IDENTIFIER [ expression ] .
 
-    ;               reduce using rule 12 (structure -> IF expression { programme } .)
-    ELSE            shift and go to state 47
+    ]               reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
+    ADD_OP          reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
+    MUL_OP          reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
+    ;               reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
+    {               reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
+    )               reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
+    :               reduce using rule 21 (expression -> IDENTIFIER [ expression ] .)
 
 
 state 42
 
-    (21) nombre -> IDENTIFIER [ nombre ] .
+    (13) structure -> IF expression { programme } .
+    (14) structure -> IF expression { programme } . ELSE { programme }
 
-    ADD_OP          reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
-    MUL_OP          reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
-    ;               reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
-    )               reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
-    {               reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
-    ]               reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
-    :               reduce using rule 21 (nombre -> IDENTIFIER [ nombre ] .)
+    ;               reduce using rule 13 (structure -> IF expression { programme } .)
+    ELSE            shift and go to state 47
 
 
 state 43
 
-    (11) structure -> WHILE expression { programme } .
+    (8) assignation-serie -> IDENTIFIER = def-iter : expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
 
-    ;               reduce using rule 11 (structure -> WHILE expression { programme } .)
+    ;               reduce using rule 8 (assignation-serie -> IDENTIFIER = def-iter : expression .)
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
 
 
 state 44
 
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS . nombre : expression
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (10) def-iter -> IDENTIFIER ITER IDENTIFIER .
+    (11) def-iter -> IDENTIFIER ITER IDENTIFIER . AS expression
 
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    :               reduce using rule 10 (def-iter -> IDENTIFIER ITER IDENTIFIER .)
+    )               reduce using rule 10 (def-iter -> IDENTIFIER ITER IDENTIFIER .)
+    AS              shift and go to state 48
 
-    nombre                         shift and go to state 48
 
 state 45
 
-    (8) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER : . expression
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (9) assignation-serie -> IDENTIFIER = FOREACH ( def-iter . ) { programme }
 
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    )               shift and go to state 49
 
-    nombre                         shift and go to state 13
-    expression                     shift and go to state 49
 
 state 46
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER . IDENTIFIER AS nombre ) { programme }
+    (10) def-iter -> IDENTIFIER . ITER IDENTIFIER
+    (11) def-iter -> IDENTIFIER . ITER IDENTIFIER AS expression
 
-    IDENTIFIER      shift and go to state 50
+    ITER            shift and go to state 38
 
 
 state 47
 
-    (13) structure -> IF expression { programme } ELSE . { programme }
+    (14) structure -> IF expression { programme } ELSE . { programme }
 
-    {               shift and go to state 51
+    {               shift and go to state 50
 
 
 state 48
 
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre . : expression
+    (11) def-iter -> IDENTIFIER ITER IDENTIFIER AS . expression
+    (15) expression -> . expression ADD_OP expression
+    (16) expression -> . expression MUL_OP expression
+    (17) expression -> . ADD_OP expression
+    (18) expression -> . ( expression )
+    (19) expression -> . NUMBER
+    (20) expression -> . IDENTIFIER
+    (21) expression -> . IDENTIFIER [ expression ]
 
-    :               shift and go to state 52
+    ADD_OP          shift and go to state 10
+    (               shift and go to state 11
+    NUMBER          shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
+    expression                     shift and go to state 51
 
 state 49
 
-    (8) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (9) assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) . { programme }
 
-    ;               reduce using rule 8 (assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression .)
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
+    {               shift and go to state 52
 
 
 state 50
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER . AS nombre ) { programme }
-
-    AS              shift and go to state 53
-
-
-state 51
-
-    (13) structure -> IF expression { programme } ELSE { . programme }
+    (14) structure -> IF expression { programme } ELSE { . programme }
     (1) programme -> . statement ;
     (2) programme -> . statement ; programme
     (3) statement -> . assignation-valeur
@@ -750,133 +747,86 @@ state 51
     (5) statement -> . structure
     (6) statement -> . PRINT expression
     (7) assignation-valeur -> . IDENTIFIER = expression
-    (8) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> . IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (11) structure -> . WHILE expression { programme }
-    (12) structure -> . IF expression { programme }
-    (13) structure -> . IF expression { programme } ELSE { programme }
+    (8) assignation-serie -> . IDENTIFIER = def-iter : expression
+    (9) assignation-serie -> . IDENTIFIER = FOREACH ( def-iter ) { programme }
+    (12) structure -> . WHILE expression { programme }
+    (13) structure -> . IF expression { programme }
+    (14) structure -> . IF expression { programme } ELSE { programme }
 
-    PRINT           shift and go to state 5
-    IDENTIFIER      shift and go to state 1
-    WHILE           shift and go to state 4
-    IF              shift and go to state 2
+    PRINT           shift and go to state 6
+    IDENTIFIER      shift and go to state 8
+    WHILE           shift and go to state 1
+    IF              shift and go to state 7
 
-    assignation-valeur             shift and go to state 6
-    structure                      shift and go to state 7
-    programme                      shift and go to state 54
-    assignation-serie              shift and go to state 8
+    structure                      shift and go to state 2
+    assignation-valeur             shift and go to state 3
+    programme                      shift and go to state 53
+    assignation-serie              shift and go to state 5
     statement                      shift and go to state 9
+
+state 51
+
+    (11) def-iter -> IDENTIFIER ITER IDENTIFIER AS expression .
+    (15) expression -> expression . ADD_OP expression
+    (16) expression -> expression . MUL_OP expression
+
+    :               reduce using rule 11 (def-iter -> IDENTIFIER ITER IDENTIFIER AS expression .)
+    )               reduce using rule 11 (def-iter -> IDENTIFIER ITER IDENTIFIER AS expression .)
+    ADD_OP          shift and go to state 22
+    MUL_OP          shift and go to state 21
+
 
 state 52
 
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : . expression
-    (14) expression -> . expression ADD_OP expression
-    (15) expression -> . expression MUL_OP expression
-    (16) expression -> . ADD_OP expression
-    (17) expression -> . ( expression )
-    (18) expression -> . nombre
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (9) assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { . programme }
+    (1) programme -> . statement ;
+    (2) programme -> . statement ; programme
+    (3) statement -> . assignation-valeur
+    (4) statement -> . assignation-serie
+    (5) statement -> . structure
+    (6) statement -> . PRINT expression
+    (7) assignation-valeur -> . IDENTIFIER = expression
+    (8) assignation-serie -> . IDENTIFIER = def-iter : expression
+    (9) assignation-serie -> . IDENTIFIER = FOREACH ( def-iter ) { programme }
+    (12) structure -> . WHILE expression { programme }
+    (13) structure -> . IF expression { programme }
+    (14) structure -> . IF expression { programme } ELSE { programme }
 
-    ADD_OP          shift and go to state 12
-    (               shift and go to state 11
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    PRINT           shift and go to state 6
+    IDENTIFIER      shift and go to state 8
+    WHILE           shift and go to state 1
+    IF              shift and go to state 7
 
-    expression                     shift and go to state 55
-    nombre                         shift and go to state 13
+    structure                      shift and go to state 2
+    assignation-valeur             shift and go to state 3
+    programme                      shift and go to state 54
+    assignation-serie              shift and go to state 5
+    statement                      shift and go to state 9
 
 state 53
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS . nombre ) { programme }
-    (19) nombre -> . NUMBER
-    (20) nombre -> . IDENTIFIER
-    (21) nombre -> . IDENTIFIER [ nombre ]
+    (14) structure -> IF expression { programme } ELSE { programme . }
 
-    NUMBER          shift and go to state 16
-    IDENTIFIER      shift and go to state 15
+    }               shift and go to state 55
 
-    nombre                         shift and go to state 56
 
 state 54
 
-    (13) structure -> IF expression { programme } ELSE { programme . }
+    (9) assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { programme . }
 
-    }               shift and go to state 57
+    }               shift and go to state 56
 
 
 state 55
 
-    (9) assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression .
-    (14) expression -> expression . ADD_OP expression
-    (15) expression -> expression . MUL_OP expression
+    (14) structure -> IF expression { programme } ELSE { programme } .
 
-    ;               reduce using rule 9 (assignation-serie -> IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression .)
-    ADD_OP          shift and go to state 27
-    MUL_OP          shift and go to state 25
+    ;               reduce using rule 14 (structure -> IF expression { programme } ELSE { programme } .)
 
 
 state 56
 
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre . ) { programme }
+    (9) assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { programme } .
 
-    )               shift and go to state 58
-
-
-state 57
-
-    (13) structure -> IF expression { programme } ELSE { programme } .
-
-    ;               reduce using rule 13 (structure -> IF expression { programme } ELSE { programme } .)
-
-
-state 58
-
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) . { programme }
-
-    {               shift and go to state 59
-
-
-state 59
-
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { . programme }
-    (1) programme -> . statement ;
-    (2) programme -> . statement ; programme
-    (3) statement -> . assignation-valeur
-    (4) statement -> . assignation-serie
-    (5) statement -> . structure
-    (6) statement -> . PRINT expression
-    (7) assignation-valeur -> . IDENTIFIER = expression
-    (8) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER : expression
-    (9) assignation-serie -> . IDENTIFIER = IDENTIFIER ITER IDENTIFIER AS nombre : expression
-    (10) assignation-serie -> . IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme }
-    (11) structure -> . WHILE expression { programme }
-    (12) structure -> . IF expression { programme }
-    (13) structure -> . IF expression { programme } ELSE { programme }
-
-    PRINT           shift and go to state 5
-    IDENTIFIER      shift and go to state 1
-    WHILE           shift and go to state 4
-    IF              shift and go to state 2
-
-    assignation-valeur             shift and go to state 6
-    structure                      shift and go to state 7
-    programme                      shift and go to state 60
-    assignation-serie              shift and go to state 8
-    statement                      shift and go to state 9
-
-state 60
-
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme . }
-
-    }               shift and go to state 61
-
-
-state 61
-
-    (10) assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme } .
-
-    ;               reduce using rule 10 (assignation-serie -> IDENTIFIER = FOREACH ( IDENTIFIER ITER IDENTIFIER AS nombre ) { programme } .)
+    ;               reduce using rule 9 (assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { programme } .)
 

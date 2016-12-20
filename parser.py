@@ -25,19 +25,35 @@ def p_statement_print(p):
 
 def p_assign_valeur(p):
     ''' assignation-valeur : IDENTIFIER '=' expression '''
-    p[0] = AST.AssignNode([AST.TokenNode(p[1]),p[3]])
+    p[0] = AST.AssignValueNode([AST.TokenNode(p[1]),p[3]])
 
 def p_assign_serie(p):
-    ''' assignation-serie : IDENTIFIER '=' IDENTIFIER ITER IDENTIFIER ':' expression
-        |  IDENTIFIER '=' IDENTIFIER ITER IDENTIFIER AS nombre ':' expression
-        |  IDENTIFIER '=' FOREACH '(' IDENTIFIER ITER IDENTIFIER AS nombre ')' '{' programme '}' '''
-    p[0] = AST.AssignNode([AST.TokenNode(p[1]),p[3]])
+    ''' assignation-serie : IDENTIFIER '=' def-iter ':' expression
+        |  IDENTIFIER '=' FOREACH '(' def-iter ')' '{' programme '}' '''
+    if len(p) == 6:
+        p[0] = AST.AssignSerieNode([AST.TokenNode(p[1]),p[3],p[5]])
+    elif len(p) == 10:
+        p[0] = AST.ForeachNode([AST.TokenNode(p[1]),p[5],p[8]])
+
+
+def p_def_iter(p):
+    ''' def-iter : IDENTIFIER ITER IDENTIFIER
+        |  IDENTIFIER ITER IDENTIFIER AS expression'''
+    nombre = p[5] if len(p) == 6 else AST.TokenNode(0)
+    p[0] = AST.DefIterNode([AST.TokenNode(p[1]),AST.TokenNode(p[3]), nombre])
 
 def p_structure(p):
     ''' structure : WHILE expression '{' programme '}'
         |  IF expression '{' programme '}'
         |  IF expression '{' programme '}' ELSE '{' programme '}' '''
-    p[0] = AST.WhileNode([p[2],p[4]])
+    print(p[1])
+    if(p[1].upper() == 'WHILE'):
+        p[0] = AST.WhileNode([p[2],p[4]])
+    elif(p[1].upper() == 'IF'):
+        if(len(p) == 6):
+            p[0] = AST.ConditionNode([p[2],p[4]])
+        elif(len(p) == 10):
+            p[0] = AST.ConditionNode([p[2],p[4],p[8]])
 
 def p_expression_op(p):
     '''expression : expression ADD_OP expression
@@ -53,14 +69,13 @@ def p_expression_paren(p):
     p[0] = p[2]
 
 def p_expression(p):
-    '''expression : nombre '''
-    p[0] = AST.TokenNode(p[1])
-
-def p_nombre(p):
-    ''' nombre : NUMBER
+    ''' expression : NUMBER
         | IDENTIFIER
-        | IDENTIFIER '[' nombre ']' '''
-    p[0] = AST.TokenNode(p[1])
+        | IDENTIFIER '[' expression ']' '''
+    if len(p) == 2:
+        p[0] = AST.TokenNode(p[1])
+    elif len(p) == 5:
+        p[0] = AST.SerieTokenNode(p[1],[p[3]])
 
 
 
@@ -86,11 +101,11 @@ def parse(program):
 yacc.yacc(outputdir='generated')
 
 if __name__ == "__main__":
-    import sys
-
+    import sys, os
     prog = open(sys.argv[1]).read()
     result = yacc.parse(prog, debug=1)
-    if result:
-        print (result)
-    else:
-        print ("Parsing returned no result!")
+    print (result)
+    graph = result.makegraphicaltree()
+    name = os.path.splitext(sys.argv[1])[0]+'-ast.pdf'
+    graph.write_pdf(name)
+    print("wrote ast to", name)

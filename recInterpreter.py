@@ -9,12 +9,48 @@ operations = {
     '/' : lambda x,y: x/y,
 }
 
-vars ={}
+values ={}
+series ={}
+
+//{x,}
+
+class Serie:
+    def __init__(self, sx, sy, start, expression):
+        self.sx = sx
+        self.sy = sy
+        self.start = start
+
+        self.values = []
+        self.expression = expression
+
+    def execute(self, others, index):
+        if(len(self.values) > index):
+            return self.values[index]
+        else:
+            x = 0;
+            self.values = []
+            newVars = { self.sx => x,
+                        self.sy => values[x-1] if x > 0 else start,
+                        "others" => others}
+            while x < index:
+                values[x] = expression.execute(newVars)
 
 @addToClass(AST.ProgramNode)
 def execute(self):
     for c in self.children:
         c.execute()
+
+@addToClass(AST.AssignValueNode)
+def execute(self):
+    values[self.children[0].tok] = self.children[1].execute()
+
+@addToClass(AST.AssignSerieNode)
+def execute(self, others):
+    sx = self.children[0].tok
+    sy = self.children[1].tok
+    start = self.children[2].execute(others)
+    expression = self.
+    series[self.children[0].tok] = Serie()
 
 @addToClass(AST.TokenNode)
 def execute(self):
@@ -32,9 +68,6 @@ def execute(self):
         args.insert(0,0)
     return reduce(operations[self.op], args)
 
-@addToClass(AST.AssignNode)
-def execute(self):
-    vars[self.children[0].tok] = self.children[1].execute()
 
 @addToClass(AST.PrintNode)
 def execute(self):

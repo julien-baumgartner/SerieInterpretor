@@ -1,12 +1,12 @@
 # coding: latin-1
 
 ''' Petit module utilitaire pour la construction, la manipulation et la
-repr�sentation d'arbres syntaxiques abstraits.
+représentation d'arbres syntaxiques abstraits.
 
-S�rement plein de bugs et autres surprises. � prendre comme un
+Sûrement plein de bugs et autres surprises. à prendre comme un
 "work in progress"...
-Notamment, l'utilisation de pydot pour repr�senter un arbre syntaxique cousu
-est une utilisation un peu "limite" de graphviz. �a marche, mais le layout n'est
+Notamment, l'utilisation de pydot pour représenter un arbre syntaxique cousu
+est une utilisation un peu "limite" de graphviz. ça marche, mais le layout n'est
 pas toujours optimal...
 '''
 
@@ -78,10 +78,10 @@ class Node:
                 edge = pydot.Edge(self.ID,c.ID)
                 edge.set_color(color)
                 edge.set_arrowsize('.5')
-                # Les arr�tes correspondant aux coutures ne sont pas prises en compte
-                # pour le layout du graphe. Ceci permet de garder l'arbre dans sa repr�sentation
+                # Les arrétes correspondant aux coutures ne sont pas prises en compte
+                # pour le layout du graphe. Ceci permet de garder l'arbre dans sa représentation
                 # "standard", mais peut provoquer des surprises pour le trajet parfois un peu
-                # tarabiscot� des coutures...
+                # tarabiscoté des coutures...
                 # En commantant cette ligne, le layout sera bien meilleur, mais l'arbre nettement
                 # moins reconnaissable.
                 edge.set_constraint('false')
@@ -90,7 +90,6 @@ class Node:
                     edge.set_labelfontcolor(color)
                 graph.add_edge(edge)
             return graph
-
 
 class ProgramNode(Node):
     type = 'Program'
@@ -116,8 +115,14 @@ class OpNode(Node):
     def __repr__(self):
         return "%s (%s)" % (self.op, self.nbargs)
 
-class AssignNode(Node):
+class AssignValueNode(Node):
     type = '='
+
+class AssignSerieNode(Node):
+    type = '='
+
+class DefIterNode(Node):
+    type = 'def-iter'
 
 class PrintNode(Node):
     type = 'print'
@@ -125,22 +130,28 @@ class PrintNode(Node):
 class WhileNode(Node):
     type = 'while'
 
+class ForeachNode(Node):
+    type = 'foreach'
+
+class ConditionNode(Node):
+    type = 'condition'
+
 class EntryNode(Node):
     type = 'ENTRY'
     def __init__(self):
         Node.__init__(self, None)
 
 def addToClass(cls):
-    ''' D�corateur permettant d'ajouter la fonction d�cor�e en tant que m�thode
-    � une classe.
+    ''' Décorateur permettant d'ajouter la fonction décorée en tant que méthode
+    é une classe.
 
-    Permet d'impl�menter une forme �l�mentaire de programmation orient�e
-    aspects en regroupant les m�thodes de diff�rentes classes impl�mentant
-    une m�me fonctionnalit� en un seul endroit.
+    Permet d'implémenter une forme élémentaire de programmation orientée
+    aspects en regroupant les méthodes de différentes classes implémentant
+    une même fonctionnalité en un seul endroit.
 
-    Attention, apr�s utilisation de ce d�corateur, la fonction d�cor�e reste dans
-    le namespace courant. Si cela d�range, on peut utiliser del pour la d�truire.
-    Je ne sais pas s'il existe un moyen d'�viter ce ph�nom�ne.
+    Attention, aprés utilisation de ce décorateur, la fonction décorée reste dans
+    le namespace courant. Si cela dérange, on peut utiliser del pour la détruire.
+    Je ne sais pas s'il existe un moyen d'éviter ce phénomène.
     '''
     def decorator(func):
         setattr(cls,func.__name__,func)
