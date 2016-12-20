@@ -75,7 +75,7 @@ def p_expression(p):
     if len(p) == 2:
         p[0] = AST.TokenNode(p[1])
     elif len(p) == 5:
-        p[0] = AST.SerieTokenNode(p[1],[p[3]])
+        p[0] = AST.TokenNode(p[1],[p[3]])
 
 
 

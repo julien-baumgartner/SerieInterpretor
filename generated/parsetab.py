@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '46F63A479D70B56817442521EA27F2F0'
+_lr_signature = '22E556C0CCF30707C5CCC8285BDA5BB1'
     
-_lr_action_items = {'WHILE':([0,18,23,25,50,52,],[1,1,1,1,1,1,]),';':([2,3,5,9,12,14,15,19,27,29,31,32,33,40,41,42,43,55,56,],[-5,-3,-4,18,-19,-20,-6,-17,-20,-7,-18,-16,-15,-12,-21,-13,-8,-14,-9,]),']':([12,14,19,31,32,33,35,41,],[-19,-20,-17,-18,-16,-15,41,-21,]),':':([12,14,19,26,31,32,33,41,44,51,],[-19,-20,-17,37,-18,-16,-15,-21,-10,-11,]),'ADD_OP':([1,6,7,10,11,12,13,14,15,16,17,19,20,21,22,24,27,29,31,32,33,35,37,41,43,48,51,],[10,10,10,10,10,-19,22,-20,22,22,10,-17,22,10,10,10,-20,22,-18,-16,-15,22,10,-21,22,10,22,]),'=':([8,],[17,]),'$end':([4,18,30,],[0,-1,-2,]),'ITER':([27,46,],[38,38,]),'PRINT':([0,18,23,25,50,52,],[6,6,6,6,6,6,]),'[':([14,27,],[24,24,]),'AS':([44,],[48,]),'}':([18,30,34,36,53,54,],[-1,-2,40,42,55,56,]),'(':([1,6,7,10,11,17,21,22,24,28,37,48,],[11,11,11,11,11,11,11,11,11,39,11,11,]),'MUL_OP':([12,13,14,15,16,19,20,27,29,31,32,33,35,41,43,51,],[-19,21,-20,21,21,-17,21,-20,21,-18,-16,21,21,-21,21,21,]),'IDENTIFIER':([0,1,6,7,10,11,17,18,21,22,23,24,25,37,38,39,48,50,52,],[8,14,14,14,14,14,27,8,14,14,8,14,8,14,44,46,14,8,8,]),'NUMBER':([1,6,7,10,11,17,21,22,24,37,48,],[12,12,12,12,12,12,12,12,12,12,12,]),'ELSE':([42,],[47,]),'IF':([0,18,23,25,50,52,],[7,7,7,7,7,7,]),'{':([12,13,14,16,19,31,32,33,41,47,49,],[-19,23,-20,25,-17,-18,-16,-15,-21,50,52,]),'FOREACH':([17,],[28,]),')':([12,14,19,20,31,32,33,41,44,45,51,],[-19,-20,-17,31,-18,-16,-15,-21,-10,49,-11,]),}
+_lr_action_items = {'}':([16,28,38,39,53,54,],[-1,-2,45,46,55,56,]),'ELSE':([46,],[49,]),'PRINT':([0,16,29,30,51,52,],[1,1,1,1,1,1,]),'IDENTIFIER':([0,1,8,9,11,14,15,16,19,20,22,29,30,35,36,37,47,51,52,],[3,12,12,12,12,12,24,3,12,12,12,3,3,41,42,12,12,3,3,]),')':([12,13,21,23,31,32,33,40,41,43,50,],[-20,-19,33,-17,-16,-15,-18,-21,-10,48,-11,]),'NUMBER':([1,8,9,11,14,15,19,20,22,37,47,],[13,13,13,13,13,13,13,13,13,13,13,]),'AS':([41,],[47,]),'MUL_OP':([10,12,13,17,18,21,23,24,27,31,32,33,34,40,44,50,],[19,-20,-19,19,19,19,-17,-20,19,-16,19,-18,19,-21,19,19,]),'ADD_OP':([1,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,27,31,32,33,34,37,40,44,47,50,],[14,14,14,20,14,-20,-19,14,14,20,20,14,14,20,14,-17,-20,20,-16,-15,-18,20,14,-21,20,14,20,]),'=':([3,],[15,]),';':([2,5,6,7,10,12,13,23,24,27,31,32,33,40,44,45,46,55,56,],[-4,-3,16,-5,-6,-20,-19,-17,-20,-7,-16,-15,-18,-21,-8,-12,-13,-9,-14,]),'(':([1,8,9,11,14,15,19,20,22,25,37,47,],[11,11,11,11,11,11,11,11,11,36,11,11,]),'ITER':([24,42,],[35,35,]),'$end':([4,16,28,],[0,-1,-2,]),':':([12,13,23,26,31,32,33,40,41,50,],[-20,-19,-17,37,-16,-15,-18,-21,-10,-11,]),'WHILE':([0,16,29,30,51,52,],[8,8,8,8,8,8,]),'FOREACH':([15,],[25,]),'IF':([0,16,29,30,51,52,],[9,9,9,9,9,9,]),'{':([12,13,17,18,23,31,32,33,40,48,49,],[-20,-19,29,30,-17,-16,-15,-18,-21,51,52,]),']':([12,13,23,31,32,33,34,40,],[-20,-19,-17,-16,-15,-18,40,-21,]),'[':([12,24,],[22,22,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'structure':([0,18,23,25,50,52,],[2,2,2,2,2,2,]),'assignation-valeur':([0,18,23,25,50,52,],[3,3,3,3,3,3,]),'programme':([0,18,23,25,50,52,],[4,30,34,36,53,54,]),'assignation-serie':([0,18,23,25,50,52,],[5,5,5,5,5,5,]),'def-iter':([17,39,],[26,45,]),'statement':([0,18,23,25,50,52,],[9,9,9,9,9,9,]),'expression':([1,6,7,10,11,17,21,22,24,37,48,],[13,15,16,19,20,29,32,33,35,43,51,]),}
+_lr_goto_items = {'expression':([1,8,9,11,14,15,19,20,22,37,47,],[10,17,18,21,23,27,31,32,34,44,50,]),'programme':([0,16,29,30,51,52,],[4,28,38,39,53,54,]),'assignation-valeur':([0,16,29,30,51,52,],[5,5,5,5,5,5,]),'statement':([0,16,29,30,51,52,],[6,6,6,6,6,6,]),'structure':([0,16,29,30,51,52,],[7,7,7,7,7,7,]),'assignation-serie':([0,16,29,30,51,52,],[2,2,2,2,2,2,]),'def-iter':([15,36,],[26,43,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,25 +26,25 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> programme","S'",1,None,None,None),
-  ('programme -> statement ;','programme',2,'p_programme_statement','parser.py',9),
-  ('programme -> statement ; programme','programme',3,'p_programme_recursive','parser.py',13),
-  ('statement -> assignation-valeur','statement',1,'p_statement','parser.py',17),
-  ('statement -> assignation-serie','statement',1,'p_statement','parser.py',18),
-  ('statement -> structure','statement',1,'p_statement','parser.py',19),
-  ('statement -> PRINT expression','statement',2,'p_statement_print','parser.py',23),
-  ('assignation-valeur -> IDENTIFIER = expression','assignation-valeur',3,'p_assign_valeur','parser.py',27),
-  ('assignation-serie -> IDENTIFIER = def-iter : expression','assignation-serie',5,'p_assign_serie','parser.py',31),
-  ('assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { programme }','assignation-serie',9,'p_assign_serie','parser.py',32),
-  ('def-iter -> IDENTIFIER ITER IDENTIFIER','def-iter',3,'p_def_iter','parser.py',40),
-  ('def-iter -> IDENTIFIER ITER IDENTIFIER AS expression','def-iter',5,'p_def_iter','parser.py',41),
-  ('structure -> WHILE expression { programme }','structure',5,'p_structure','parser.py',46),
-  ('structure -> IF expression { programme }','structure',5,'p_structure','parser.py',47),
-  ('structure -> IF expression { programme } ELSE { programme }','structure',9,'p_structure','parser.py',48),
-  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','parser.py',59),
-  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','parser.py',60),
-  ('expression -> ADD_OP expression','expression',2,'p_minus','parser.py',64),
-  ('expression -> ( expression )','expression',3,'p_expression_paren','parser.py',68),
-  ('expression -> NUMBER','expression',1,'p_expression','parser.py',72),
-  ('expression -> IDENTIFIER','expression',1,'p_expression','parser.py',73),
-  ('expression -> IDENTIFIER [ expression ]','expression',4,'p_expression','parser.py',74),
+  ('programme -> statement ;','programme',2,'p_programme_statement','myparser.py',9),
+  ('programme -> statement ; programme','programme',3,'p_programme_recursive','myparser.py',13),
+  ('statement -> assignation-valeur','statement',1,'p_statement','myparser.py',17),
+  ('statement -> assignation-serie','statement',1,'p_statement','myparser.py',18),
+  ('statement -> structure','statement',1,'p_statement','myparser.py',19),
+  ('statement -> PRINT expression','statement',2,'p_statement_print','myparser.py',23),
+  ('assignation-valeur -> IDENTIFIER = expression','assignation-valeur',3,'p_assign_valeur','myparser.py',27),
+  ('assignation-serie -> IDENTIFIER = def-iter : expression','assignation-serie',5,'p_assign_serie','myparser.py',31),
+  ('assignation-serie -> IDENTIFIER = FOREACH ( def-iter ) { programme }','assignation-serie',9,'p_assign_serie','myparser.py',32),
+  ('def-iter -> IDENTIFIER ITER IDENTIFIER','def-iter',3,'p_def_iter','myparser.py',40),
+  ('def-iter -> IDENTIFIER ITER IDENTIFIER AS expression','def-iter',5,'p_def_iter','myparser.py',41),
+  ('structure -> WHILE expression { programme }','structure',5,'p_structure','myparser.py',46),
+  ('structure -> IF expression { programme }','structure',5,'p_structure','myparser.py',47),
+  ('structure -> IF expression { programme } ELSE { programme }','structure',9,'p_structure','myparser.py',48),
+  ('expression -> expression ADD_OP expression','expression',3,'p_expression_op','myparser.py',59),
+  ('expression -> expression MUL_OP expression','expression',3,'p_expression_op','myparser.py',60),
+  ('expression -> ADD_OP expression','expression',2,'p_minus','myparser.py',64),
+  ('expression -> ( expression )','expression',3,'p_expression_paren','myparser.py',68),
+  ('expression -> NUMBER','expression',1,'p_expression','myparser.py',72),
+  ('expression -> IDENTIFIER','expression',1,'p_expression','myparser.py',73),
+  ('expression -> IDENTIFIER [ expression ]','expression',4,'p_expression','myparser.py',74),
 ]

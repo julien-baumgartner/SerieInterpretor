@@ -96,8 +96,8 @@ class ProgramNode(Node):
 
 class TokenNode(Node):
     type = 'token'
-    def __init__(self, tok):
-        Node.__init__(self)
+    def __init__(self, tok, children=None):
+        Node.__init__(self, children)
         self.tok = tok
 
     def __repr__(self):

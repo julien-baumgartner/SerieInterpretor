@@ -8,7 +8,6 @@ reserved_words = (
 	'else',
 	'as',
 	'iter',
-	'return',
 )
 
 tokens = (
