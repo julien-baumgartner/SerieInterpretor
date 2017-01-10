@@ -1,0 +1,7 @@
+triangulaire = x iter y as 0: y + x + 1;
+
+a = 0;
+while(a -10){
+    print(triangulaire[a]);
+    a = a + 1;
+};
