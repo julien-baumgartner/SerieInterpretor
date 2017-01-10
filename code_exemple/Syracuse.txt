@@ -1,0 +1,15 @@
+pair = x iter y as 1: -y;
+
+c1 = foreach(x iter y as 14) {
+	if(pair[y] - 1){
+		y = y / 2;
+	} else {
+		y = y * 3 + 1;
+	};
+};
+
+a = 0;
+while(a-10){
+	print(c1[a]);
+	a = a + 1;
+};
