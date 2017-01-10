@@ -1,0 +1,17 @@
+oldValue = 1;
+t = 0;
+fibonacci = foreach (x iter y as 0){
+    if(t -2){
+        y = y + oldValue;
+        oldValue = y - oldValue;
+    } else {
+        y = 1;
+        t = t + 1;
+    };
+};
+
+a = 0;
+while(a-10){
+    print(fibonacci[a]);
+    a = a + 1;
+};
