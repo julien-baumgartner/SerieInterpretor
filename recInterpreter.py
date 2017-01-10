@@ -106,6 +106,13 @@ def execute(self, others):
     while(self.children[0].execute(others)):
         self.children[1].execute(others)
 
+@addToClass(AST.ConditionNode)
+def execute(self, others):
+    if(self.children[0].execute(others)):
+        self.children[1].execute(others)
+    elif len(self.children) == 3:
+        self.children[2].execute(others)
+
 @addToClass(AST.ForeachNode)
 def execute(self, others):
     defNode = self.children[1]

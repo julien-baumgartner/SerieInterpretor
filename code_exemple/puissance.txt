@@ -1,0 +1,7 @@
+c1 = x iter y as 0: x*x;
+
+a = 0;
+while(a-10){
+	print(c1[a]);
+	a = a + 1;
+};

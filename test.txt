@@ -13,5 +13,6 @@ while(a - 5) {
     } else {
         c5 = x iter y as a+1 : y;
     };
+	print(c5[a]);
     a = a + 1;
 };
