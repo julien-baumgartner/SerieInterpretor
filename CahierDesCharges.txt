@@ -7,30 +7,30 @@
 Ce projet est un language permettant d'exprimer des séries mathématiques.
 
 Le language permet également de faire des opérations de base, ainsi que
-de afficher des valeurs numériques.
+d'afficher des valeurs numériques.
 
 ATTENTION: contrairement à des objets/listes où les valeurs sont calculées à l'avance,
 les séries ne calculent leurs valeurs uniquement lorsqu'on souhaite utiliser une valeur de la série.
 Ceci est dû au fait qu'une série est par définition infinie, ce qui rend illusoire le précalcul.
 
-La suite de Topic qui va suivre montre des exemples pouvant être utilisés tel quel.
+La suite des sections qui va suivre montre des exemples pouvant être utilisés tel quel.
 -----------------------------------------------
  -- définition d'une liste
 -----------------------------------------------
 c1 = x iter y as 0: y+1;
 
 c1 est le nom de la variable contenant la liste.
-x est le nom de l'index des éléments de la série pouvant être utilisé dans le calcul de la série
-y est le nom de la valeur de l'élément précédent de la série pouvant être utilisé dans le calcul de la série
-0 est la valeur de l'élement à l'indice -1
-y+1 est la fonction qui va être appelée pour trouver l'élement suivant à partir de l'index et de la valeur de l'élement actuel
+x est une valeur locale pouvant être utilisé dans le calcul de la série. Il s'agit de l'index la valeur à calculer.
+y est une valeur locale pouvant être utilisé dans le calcul de la série. Il s'agit de la valeur du précédent index.
+0 (start) est la valeur de l'élement à l'indice -1
+y+1 est la fonction qui va être appelée pour trouver l'élement suivant à partir de l'index (x) et de la valeur précédente (y ou start)
 
 la liste stocke { variable, valeur_de_départ, nom_iter_local, nom_var_local, function }
-ici {c1, 10, "x", "y", "y+1"}
+ici {c1, 10, "x", "y", Node("y+1")}
 Si la liste répresente {1, 2, 3, 4, 5, ...), son contenu n'est pas encore calculé.
 Il ne le sera uniquement lorsqu'on cherchera à obtenir une valeur de la série.
 
-Le contenu est calculé de la manière suivante
+Le contenu de cette série est calculé de la manière suivante
 {
   c1[0]: valeur_de_départ+1,  //1
   c1[1]: c1[0]+1,             //2
@@ -38,79 +38,127 @@ Le contenu est calculé de la manière suivante
   ...
 }
 ainsi avec une fonction plus compliqué "x + y*2 - 5"
-c2 = x iter y as 0 : x + y*2 - 5;
+c2 = x iter y as -2 : x + y*2 + 3;
 {
-  c2[0]: 0 + valeur_de_départ*2 - 5,   //-5
-  c2[1]: 1 + c2[0]*2 - 5,              //-14
-  c2[2]: 2 + c2[1]*2 - 5,              //-31
+  c2[0]: 0 + valeur_de_départ*2 + 3,   // -1
+  c2[1]: 1 + c2[0]*2 + 3,              //  2
+  c2[2]: 2 + c2[1]*2 + 3,              //  9
   ...
 }
 
  -- utilisation de variable global
 -----------------------------------------------
 Il est possible d'utiliser des variables d'une portée supérieure.
-A l'extérieur de la fonction "c1[x] * c2[x] + y", les valeurs de 
-x et y n'existe pas 
+cependant, la variable locale emporte sur la variable globale.
+A l'extérieur de la fonction "c1[x] * c2[x] + y", les valeurs de
+x et y n'existe pas
 
 c3 = x iter y as 0 : c1[x] * c2[x] + y;
 
 ici {c3, 0, c1[localIt]*c2[localIt]+localVar}
-cette liste est { 10, 17.5, 22.5, ... 
+cette liste est { 10, 17.5, 22.5, ...
 
  -- récupérer le nième élement d'une liste
 -----------------------------------------------
 c3[2]
 
 ici {c3, 0, c1[localIt]*c2[localIt] + LocalVal}
+c1 = {1,2,3,4,5,6,7,...}
+c2 = {-1, 2, 9, ...}
 donc
 pour calculer c3[2], il faut c3[1] donc il faut c3[0]
 
-c3[0] = c1[0]*c2[0] + 0 = 2*5+0 = 10
-c3[1] = c1[1]*c2[1] + c3[0] = 3*2.5+10 = 17.5
-c3[2] = c1[2]*c[2] + c3[1] = 4*1.25+17.5 = 22.5
+c3[0] = c1[0]*c2[0] + 0 = 1*-1+0 = -1
+c3[1] = c1[1]*c2[1] + c3[0] = 2*2+(-1) = 3
+c3[2] = c1[2]*c[2] + c3[1] = 3*9+3 = 30
 
-cela correspond à la valeur 22.5
+cela correspond à la valeur 30
 
  -- affichage d'une valeur
 -----------------------------------------------
-print("text");
-print(c1, 0, 4);
-print(c2[2]);
-print(c3, 1, 2);
+l'expression print ne permet que l'affichage d'une expression, donc un chiffre.
+On peut donc afficher le contenu d'une variable de la manière suivante.
 
-affiche
+a = 10;
+print(a);
+//affiche 10
 
-text
-{2,3,4,5}
-1.25
-{17.5,22.5}
+ou d'une série de la manière suivante.
+
+c1 = x iter y as 0 : y+1;
+a = 0;
+while(a-5){
+	print(c1[a]);
+	a = a + 1;
+};
+//affiche
+1
+2
+3
+4
+5
 
  -- boucle foreach
 -----------------------------------------------
-Remarque foreach est une fonction !!!
-y est la valeur précedente dans c4
+L'assignation foreach est une assignation plus permissive que la version montrer plus haut.
+L'assignation permet d'integrer du code à l'intérieur de la déclaration.
+L'utilisation générale est de pouvoir ajouter des conditions.
+La fonction foreach doit se charger elle-même de modifier la variable y mais le x s'incrémente tous seul.
 
 c4 = x iter y as 2 : -y;  //{-2, 2, -2, 2, -2, 2}
 c5 = foreach( x iter y as 0) {
-	if(y1 < 5) {
-		y = c4[c1[x]] + y2;
+	if(x < 3) {
+		y = c4[x] + y;
 	} else {
-		y = c4[c1[x]] * y2;
+		y = c4[x] * y;
 	}
 }
 
-on utilise x pour parcourir c1 { 2, 3, 4, 5, 6 ... }
-on utilise ces valeurs pour parcourir c4
-        0   1 x|2   3   4   5   6
+on utilise x pour parcourir c4
+      x|0   1   2   3   4   5   6
 c4 = { -2,  2, -2,  2, -2,  2, -2,  2, ...}
 
-                  y1    y2
-c5[0] = return c4[2] +  0 = -2 +  0 = -2
-c5[1] = return c4[3] + -2 =  2 + -2 = 0
-c5[2] = return c4[4] +  0 = -2 +  0 = -2
-c5[3] = return c4[5] * -2 =  2 * -2 = -4
-c5[4] = return c4[6] * -4 = -2 * -4 = 8
+
+c5[0] = return c4[0] +  0 = -2 +  0 = -2
+c5[1] = return c4[1] + -2 =  2 + -2 = 0
+c5[2] = return c4[2] +  0 = -2 +  0 = -2
+c5[3] = return c4[3] * -2 =  2 * -2 = -4
+c5[4] = return c4[40] * -4 = -2 * -4 = 8
 ...
 
+ -- optimisation
+-----------------------------------------------
+Le fonctionnement de la série contient une petite optimisation afin d'améliorer le temps de calcul.
+Il s'agit d'un stockage des valeurs dans un tableau afin que si des appels de valeurs déjà calculer reviennent.
+La longue liste de calcul ne se refasse pas.
+Malheureusement, lorsque l'appel demande une valeur en dehors de ce qui à été calculer, le programme recalcule la totalité du tableau.
 
+ -- cas non pris en compte
+-----------------------------------------------
+Le principal problème non-résolu à ce projet, est que les variables des fonctions sont rechercher par le nom,
+et pas par la valeur qu'ils avaient quand la fonction a été créer.
+Il faut donc faire très attention au différents noms de nos variables.
 
+exemple
+
+c1 = x iter y as 0 : y+1;
+c2 = x iter y as 0 : c1[x]/2;
+
+print(c2[2]); //affiche 1.5
+c1 = x iter y as 0 : 0;
+print(c2[2]); //affiche 0
+
+Le deuxième problème est qu'il n'existe aucune sécurité sur l'utilisation des variables de série et les normales.
+C'est à dire qu'il peut y avoir une variable normal et une variable de série ayant le même nom.
+Et par conséquent, si une personne se trompe en utilisant l'un à la place de l'autre, le programme continura sans remarquer le problème.
+
+exemple
+
+a = 0;
+a = x iter y as 10 : -y;
+
+while(a-5) {
+    print(a);
+    a = a + 1;
+};
+dans cette exemple, la série n'est jamais utiliser, car les crochets de la série ont été oublié dans le print.
