@@ -1,0 +1,7 @@
+c1 = x iter y as 0 : y+1;
+c2 = x iter y as 0 : c1[x]/2;
+c3 = x iter y as 0 : c1[x]/2;
+
+print(c2[2]);
+c1 = x iter y as 0 : 0;
+print(c3[2]);

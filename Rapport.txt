@@ -126,6 +126,19 @@ c5[3] = return c4[3] * -2 =  2 * -2 = -4
 c5[4] = return c4[40] * -4 = -2 * -4 = 8
 ...
 
+
+-- Mots réservés
+-----------------------------------------------
+
+while       print       foreach
+if          else        as
+iter
+
+-- Caractères spéciaux
+-----------------------------------------------
+
+(   )   ;   =   {   }   :   [   ]   +   -   *   /
+
  -- optimisation
 -----------------------------------------------
 Le fonctionnement de la série contient une petite optimisation afin d'améliorer le temps de calcul.
@@ -139,20 +152,21 @@ Le principal problème non-résolu à ce projet, est que les variables des fonct
 et pas par la valeur qu'ils avaient quand la fonction a été créer.
 Il faut donc faire très attention au différents noms de nos variables.
 
-exemple
+exemple (probleme1.txt)
 
 c1 = x iter y as 0 : y+1;
 c2 = x iter y as 0 : c1[x]/2;
+c3 = x iter y as 0 : c1[x]/2;
 
 print(c2[2]); //affiche 1.5
 c1 = x iter y as 0 : 0;
-print(c2[2]); //affiche 0
+print(c3[2]); //affiche 0
 
 Le deuxième problème est qu'il n'existe aucune sécurité sur l'utilisation des variables de série et les normales.
 C'est à dire qu'il peut y avoir une variable normal et une variable de série ayant le même nom.
 Et par conséquent, si une personne se trompe en utilisant l'un à la place de l'autre, le programme continura sans remarquer le problème.
 
-exemple
+exemple (probleme2.txt)
 
 a = 0;
 a = x iter y as 10 : -y;

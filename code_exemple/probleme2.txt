@@ -1,0 +1,7 @@
+a = 0;
+a = x iter y as 10 : -y;
+
+while(a-5) {
+    print(a);
+    a = a + 1;
+};
