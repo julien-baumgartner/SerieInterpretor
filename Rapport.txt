@@ -163,8 +163,8 @@ c1 = x iter y as 0 : 0;
 print(c3[2]); //affiche 0
 
 Le deuxième problème est qu'il n'existe aucune sécurité sur l'utilisation des variables de série et les normales.
-C'est à dire qu'il peut y avoir une variable normal et une variable de série ayant le même nom.
-Et par conséquent, si une personne se trompe en utilisant l'un à la place de l'autre, le programme continura sans remarquer le problème.
+C'est à dire qu'on peut tenter d'utiliser une variable normal comme une variable de série.
+Et par conséquent, si une personne se trompe en utilisant l'un à la place de l'autre, le programme génère une erreur.
 
 exemple (probleme2.txt)
 
@@ -175,4 +175,4 @@ while(a-5) {
     print(a);
     a = a + 1;
 };
-dans cette exemple, la série n'est jamais utiliser, car les crochets de la série ont été oublié dans le print.
+dans cette exemple, le programme plante dans la condition du while car la série remplace la variable et l'utilisation d'une série doit utiliser des crochets
