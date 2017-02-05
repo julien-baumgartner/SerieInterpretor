@@ -1,0 +1,56 @@
+ --- Grammaire - List Interpretor
+ --- Joel Vaucher et Julien Baumgartner
+ --- 06.12.2016 cours Compilateur
+-----------------------------------------------
+ -- Program
+-----------------------------------------------
+ program : statement ;
+		 : statement ; program
+
+-----------------------------------------------
+ -- Statement
+-----------------------------------------------
+ statement : assignation-valeur
+		   : assignation-serie
+		   : structure
+		   : PRINT expression
+
+-----------------------------------------------
+ -- Assignation-valeur
+-----------------------------------------------
+ assignation-valeur : IDENTIFIER = expression
+
+-----------------------------------------------
+ -- Assignation-serie
+-----------------------------------------------
+ assignation-serie : IDENTIFIER = def-iter : expression
+				   : IDENTIFIER = FOREACH def-iter { program }
+				   
+-----------------------------------------------
+ -- def-iter
+-----------------------------------------------	
+ def-iter : IDENTIFIER ITER IDENTIFIER
+ def-iter : IDENTIFIER ITER IDENTIFIER AS nombre
+ 
+-----------------------------------------------
+ -- structure
+-----------------------------------------------
+ structure : WHILE expression { program }
+		   : IF expression { program }
+		   : IF expression { program } ELSE { program }
+
+-----------------------------------------------
+ -- expression
+-----------------------------------------------
+ expression : expression ADD_OP expression
+            : expression MUL_OP expression
+			: ADD_OP expression
+			: ( expression )
+			: nombre
+
+-----------------------------------------------
+ -- nombre
+-----------------------------------------------
+ nombre : NUMBER
+		: IDENTIFIER
+        : IDENTIFIER[nombre]
